@@ -42,7 +42,7 @@ func (j *Jazida) Update() error {
 func (j *Jazida) Delete(Latitude string, Longitude string) error {
     db := config.GetDB()
     _, err := db.Exec(
-        "DELETE FROM jazida WHERE Latitude = :4 AND Longitude = :5",
+        "DELETE FROM jazida WHERE Latitude = :1 AND Longitude = :2",
         Latitude, Longitude,
     )
     return err
