@@ -67,5 +67,14 @@ func SetupRoutes(router *gin.Engine) {
         }
         c.Status(http.StatusNoContent)
     })
+
+    router.GET("/regioes", func(c *gin.Context) {
+        Regioes, err := dao.ListRegioes()
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+            return
+        }
+        c.JSON(http.StatusOK, Regioes)
+    })
 }
 
