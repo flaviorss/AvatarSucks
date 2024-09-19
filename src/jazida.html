@@ -81,7 +81,7 @@
   <div class="container pt-4 cont">
     <h1 id="titulo" class="">Jazida</h1>
     <h4 id="sub-titulo"> CREATE Jazida </h4>
-    <form class="row g-3">
+    <form class="row g-3" id="createForm">
         <div class="col-sm-3">
           <label for="inputlatitude" class="form-label">Latitude</label>
           <input type="text" class="form-control" id="inputlatitude" autofocus placeholder="DD.DD-Norte ou DD.DD-Sul" 
@@ -117,46 +117,16 @@
         </div>
       </form>
 
+      <script src = "getJazidas.js"></script>
 
       <hr class="my-4">
       <h4 id="sub-titulo"> SELECT Jazidas </h4>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Latitude</th>
-            <th scope="col">Longitude</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Altura</th>
-            <th scope="col">Base</th>
-            <th scope="col">ID Região</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <tr>
-            <th scope="row">25.34-Norte</th>
-            <th>67.34-Leste</td>
-            <td>Veia da Lua</td>
-            <td>58.90</td>
-            <td>34.56</td>
-            <td>5</td>
-            <td><button type="button" class="btn btn-warning">Editar</button></td>
-            <td><button type="button" class="btn btn-danger">Excluir</button></td>
-          </tr>
-          <tr>
-            <th scope="row">34.56-Sul</th>
-            <th>67.34-Oeste</td>
-            <td>Fonte Celestial</td>
-            <td>34.56</td>
-            <td>58.90</td>
-            <td>9</td>
-            <td><button type="button" class="btn btn-warning">Editar</button></td>
-            <td><button type="button" class="btn btn-danger">Excluir</button></td>
-          </tr>
-        </tbody>
-      </table>
-
+      <!--<table class="table">--!>
+      <div id="jazida-table-container"><\div>
+      <div>
+          <script src = "getJazidas.js"></script>
+      </div>
+          
   </div>
 
 
