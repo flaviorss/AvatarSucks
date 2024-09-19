@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Flávio Santos & Luigi Eliabe">
+  <title>AvatarSucks - Militar</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="icon" href="https://pbs.twimg.com/media/FhDNFzZaEAITS4o.jpg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    body {
+        background-color:rgb(210, 212, 216);
+    }
+  </style>
+</head>
+
+<body>
+  <!--Cabeçalho-->
+  <nav class="navbar shadow navbar-dark bg-primary fixed-top">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+        aria-controls="offcanvasExample">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">AvatarSucks</a>
+    </div>
+  </nav>
+
+  <!--SideNavBar-->
+  <div class="offcanvas offcanvas-start d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" tabindex="-1"
+    id="offcanvasExample" aria-labelledby="offcanvasExampleLabel" style="width: 280px;">
+    <a href="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <img src="https://yt3.googleusercontent.com/-CFTJHU7fEWb7BYEb6Jh9gm1EpetvVGQqtof0Rbh-VQRIznYYKJxCaqv_9HeBcmJmIsp2vOO9JU=s900-c-k-c0x00ffffff-no-rj" 
+        alt="" width="60" class="rounded-circle me-4"><br>
+      <span class="fs-4">AvatarSucks</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li>
+        <a href="index.html" class="nav-link link-body-emphasis">
+          <i class="bi bi-house-door me-2"></i>
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="jazida.html" class="nav-link link-body-emphasis">
+          <i class="bi bi-gem me-2"></i>
+          Jazida
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link link-body-emphasis dropdown-toggle active" aria-current="page" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+          <i class="bi bi-people-fill"></i>
+          Humano
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="humano.html">Humano</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="militar.html">Militar</a></li>
+          <li><a class="dropdown-item" href="cientista.html">Cientista</a></li>
+          <li><a class="dropdown-item" href="minerador.html">Minerador</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="relatorio.html" class="nav-link link-body-emphasis">
+          <i class="bi bi-list-columns-reverse me-2"></i>
+          Relatório
+        </a>
+      </li>
+    </ul>
+    <hr>
+  </div>
+
+  <!--Corpo Principal-->
+  <div class="container pt-4 cont">
+    <h1 id="titulo" class="">Humano - Militar</h1>
+    <h4 id="sub-titulo"> CREATE Militar </h4>
+    <form class="row g-3">
+        <div class="col-sm-1">
+          <label for="inputID" class="form-label">ID</label>
+          <input type="number" class="form-control" id="inputID" autofocus required>
+        </div>
+        <div class="col-sm-3">
+          <label for="inputNome" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="inputNome" maxlength="100" required>
+        </div>
+        <div class="col-sm-1">
+            <label for="inputGenero" class="form-label">Genero</label>
+            <select name="inputGenero" id="inputGenero" class="form-select">
+                <option>M</option>
+                <option>F</option>
+            </select>
+          </div>
+        <div class="col-sm-2">
+          <label for="inputSalario" class="form-label">Salario</label>
+          <input type="number" class="form-control" id="inputSalario">
+        </div>
+        <div class="col-sm-2">
+            <label for="inputIDColonia" class="form-label">ID Colonia</label>
+            <select name="inputIDColonia" id="inputIDColonia" class="form-select" required>
+                <option>0</option>
+                <option>1</option>
+            </select>
+        </div>
+        <div class="col-sm-3">
+            <label for="inputPatente" class="form-label">Patente</label>
+            <input type="text" class="form-control" id="inputPatente" maxlength="50" required>
+          </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">Criar Militar</button>
+          <button type="reset" class="btn btn-danger">Limpar</button>
+        </div>
+      </form>
+
+
+      <hr class="my-4">
+      <h4 id="sub-titulo"> SELECT Militar </h4>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Genero</th>
+            <th scope="col">Salario</th>
+            <th scope="col">ID Colonia</th>
+            <th scope="col">Patente</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr>
+            <th scope="row">1</th>
+            <td>Cachorrão</td>
+            <td>M</td>
+            <td>600.00</td>
+            <td>1</td>
+            <td>General</td>
+            <td><button type="button" class="btn btn-warning">Editar</button></td>
+            <td><button type="button" class="btn btn-danger">Excluir</button></td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Luigui</td>
+            <td>M</td>
+            <td>1000.00</td>
+            <td>2</td>
+            <td>Soldado</td>
+            <td><button type="button" class="btn btn-warning">Editar</button></td>
+            <td><button type="button" class="btn btn-danger">Excluir</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+  </div>
+
+
+  <script></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    <script>
+        window.onload = function() {
+          var selectElement = document.getElementById("inputIDColonia");
+          selectElement.selectedIndex = -1;
+        };
+      </script>
+
+</body>
+
+</html>
