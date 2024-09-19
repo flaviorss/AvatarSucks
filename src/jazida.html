@@ -120,43 +120,67 @@
 
       <hr class="my-4">
       <h4 id="sub-titulo"> SELECT Jazidas </h4>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Latitude</th>
-            <th scope="col">Longitude</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Altura</th>
-            <th scope="col">Base</th>
-            <th scope="col">ID Região</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <tr>
-            <th scope="row">25.34-Norte</th>
-            <th>67.34-Leste</td>
-            <td>Veia da Lua</td>
-            <td>58.90</td>
-            <td>34.56</td>
-            <td>5</td>
-            <td><button type="button" class="btn btn-warning">Editar</button></td>
-            <td><button type="button" class="btn btn-danger">Excluir</button></td>
-          </tr>
-          <tr>
-            <th scope="row">34.56-Sul</th>
-            <th>67.34-Oeste</td>
-            <td>Fonte Celestial</td>
-            <td>34.56</td>
-            <td>58.90</td>
-            <td>9</td>
-            <td><button type="button" class="btn btn-warning">Editar</button></td>
-            <td><button type="button" class="btn btn-danger">Excluir</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <!--<table class="table">--!>
+          <div id="jazida-table-container"><\div>
+      <div>
+      <script>
+          async function fetchData() {
+                try{
+                    const response = await fetch("https://databases-levy-na-hilton.trycloudflare.com/jazidas");
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                     }
+                        const data = await response.json();
+                              console.log(data);
+                        showJazida(data);
+                     } catch (error) {
+                      console.error('Fetch error:', error);
+                      }
+                      }
 
+              function showJazida(jazidas) {
+                                const container = document.getElementById('jazida-table-container');
+                                let tableHTML = `
+                                                <table class="table">
+                                                <thead>
+                                                <tr>
+                                                <th scope="col">Latitude</th>
+                                                <th scope="col">Longitude</th>
+                                                <th scope="col">Nome</th>
+                                                <th scope="col">Altura</th>
+                                                <th scope="col">Base</th>
+                                                <th scope="col">ID Região</th>
+                                                <th scope="col"></th>
+                                                <th scope="col"></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody class="table-group-divider">`;
+                                   
+                                jazidas.forEach(jazida => {
+                 tableHTML += `
+             <tr>
+             <th scope="row">${jazida.Latitude}</th>
+             <th>${jazida.Longitude}</th>
+             <td>${jazida.Nome}</td>
+             <td>${jazida.Altura}</td>
+             <td>${jazida.Base}</td>
+             <td>${jazida.IDRegiao}</td>
+             <td><button type="button" class="btn btn-warning">Editar</button></td>
+             <td><button type="button" class="btn btn-danger">Excluir</button></td>
+             </tr>`;
+                                              });
+
+                                tableHTML += `
+             </tbody>
+             </table>`;
+
+                                container.innerHTML = tableHTML;
+                            }
+
+
+          </script>
+          </div>
+          
   </div>
 
 
@@ -168,6 +192,7 @@
       window.onload = function() {
         var selectElement = document.getElementById("inputIDRegiao");
         selectElement.selectedIndex = -1;
+                  fetchData();
       };
     </script>
 
