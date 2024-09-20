@@ -51,6 +51,94 @@ async function createHumano() {
        });
 }
 
+async function fetchColonias(){
+    try{
+        const response = await fetch(fetchURL + "/colonias");
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const colonias = await response.json();
+        populateColoniaSelect(colonias);
+        populateColoniaSelectModal(colonias);
+    } catch (error) {
+        console.error('Fetch regions error:', error);
+    }
+}
+
+async function populateColoniaSelect(colonias) {
+    const select = document.getElementById('inputIDColonia');
+
+    select.innerHTML = '<option value=""></option>';
+
+    colonias.forEach(colonia => {
+        const option = document.createElement('option');
+        option.value = colonia.ID; // Assuming the API returns an id field
+        option.textContent = `${colonia.ID} - ${colonia.Empresa}` // Assuming the API returns a nome field
+        select.appendChild(option);
+    });
+        
+}
+
+async function populateColoniaSelectModal(colonias) {
+    const select = document.getElementById('inputModalIDColonia');
+
+    select.innerHTML = '<option value=""></option>';
+
+    colonias.forEach(colonia => {
+        const option = document.createElement('option');
+        option.value = colonia.ID; // Assuming the API returns an id field
+        option.textContent = `${colonia.ID} - ${colonia.Empresa}` // Assuming the API returns a nome field
+        select.appendChild(option);
+    });
+        
+}
+
+async function editHumano(ID, Nome, Genero, Salario, IDColonia) {
+    // Preencher os campos do modal com os dados da jazida
+    document.getElementById('inputModalNome').value = Nome;
+    document.getElementById('inputModalGenero').value = Genero;
+    document.getElementById('inputModalSalario').value = Salario;
+    document.getElementById('inputModalIDColonia').value = IDColonia;
+
+    document.getElementById('updateForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const salario = document.getElementById('inputModalSalario').value;
+        const genero = document.getElementById('inputModalGenero').value;
+        const nome = document.getElementById('inputModalNome').value;
+        const idcolonia = document.getElementById('inputModalIDColonia').value;
+
+        const humanoData = {
+            Nome: nome,
+            Salario: parseFloat(salario),
+            Genero: genero,
+            IDColonia: idcolonia
+        };
+
+        try {
+            const response = await fetch(`${fetchURL}/humanos/${ID}`, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(humanoData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            await fetchData();
+            const modalElement = document.getElementById('modalEditarHumano');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            modal.hide(); 
+        } catch (error) {
+            console.error('Fetch update error:', error);
+        }
+    });
+
+}
+
 async function deleteHumano(id) {
     try{
         const response = await fetch(`${fetchURL}/humanos/${id}`, {
@@ -90,7 +178,12 @@ function showHumano(humanos) {
                      <td>${humano.Salario}</td>
                      <td>${humano.Genero}</td>
                      <td>${humano.IDColonia}</td>
-                     <td><button onclick="test()" type="button" class="btn btn-warning">Editar</button></td>
+                     <td><button onclick="editHumano('${humano.ID}', '${humano.Nome}', '${humano.Genero}', '${humano.Salario}', ${humano.IDColonia})" 
+                            type="button" 
+                            data-bs-toggle="modal"
+                            class="btn btn-warning" 
+                            data-bs-target="#modalEditarHumano" 
+     c                      lass="btn btn-warning">Editar</button></td>
                      <td><button onclick="deleteHumano(${humano.ID})" type="button" class="btn btn-danger">Excluir</button></td>
                      </tr>`;
     });
@@ -103,4 +196,5 @@ function showHumano(humanos) {
 }
 
 fetchData();
+fetchColonias();
 createHumano();
