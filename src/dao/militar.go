@@ -19,8 +19,8 @@ type Militar struct {
 func (m *Militar) Create() error {
     db := config.GetDB()
     _,err := db.Exec(
-        "INSERT INTO humano (Salario, Nome, Genero, IDColonia) VALUES (:1, :2, :3, :4)",
-        m.Salario, m.Nome, m.Genero, m.IDColonia)
+        "INSERT INTO humano (Salario, Nome, Genero, IDColonia, Cargo) VALUES (:1, :2, :3, :4, 'Militar')",
+        m.Salario, m.Nome, m.Genero, m.IDColonia,)
 
 
     if err != nil {
@@ -62,6 +62,10 @@ func (m *Militar) Delete(id int) error {
     db := config.GetDB()
     _, err := db.Exec(
         "DELETE FROM militar WHERE ID = :1",
+        id,
+    )
+    _, err = db.Exec(
+        "DELETE FROM humano WHERE ID = :1",
         id,
     )
     return err
