@@ -201,14 +201,6 @@ async function updateJazida() {
     });
 }
 
-async function updateJazida2() {
-    try{
-        
-    } catch (error){
-        console.error('Fetch update error:', error);
-    }
-}
-
 async function deleteJazida(latitude, longitude) {
     try{
         const response = await fetch(`${fetchURL}/jazidas/${latitude}/${longitude}`, {
