@@ -80,7 +80,7 @@
   <div class="container pt-4 cont">
     <h1 id="titulo" class="">Humano - Cientista</h1>
     <h4 id="sub-titulo"> CREATE Cientista </h4>
-    <form class="row g-3">
+    <form class="row g-3" id="createForm">
         <div class="col-sm-3">
           <label for="inputNome" class="form-label">Nome</label>
           <input type="text" class="form-control" id="inputNome" maxlength="100" required>
@@ -116,42 +116,9 @@
 
       <hr class="my-4">
       <h4 id="sub-titulo"> SELECT Cientista </h4>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Genero</th>
-            <th scope="col">Salario</th>
-            <th scope="col">ID Colonia</th>
-            <th scope="col">Area de Atuação</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody class="table-group-divider">
-          <tr>
-            <th scope="row">1</th>
-            <td>Cachorrão</td>
-            <td>M</td>
-            <td>600.00</td>
-            <td>1</td>
-            <td>Bootonico</td>
-            <td><button type="button" class="btn btn-warning">Editar</button></td>
-            <td><button type="button" class="btn btn-danger">Excluir</button></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Luigui</td>
-            <td>M</td>
-            <td>1000.00</td>
-            <td>2</td>
-            <td>Zoologo</td>
-            <td><button type="button" class="btn btn-warning">Editar</button></td>
-            <td><button type="button" class="btn btn-danger">Excluir</button></td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="cientista-table-container">
+      </div>
+      <script src="cientista.js"></script>
 
   </div>
 
