@@ -33,7 +33,7 @@ func (h *Humano) Update() error {
 	db := config.GetDB()
 	_, err := db.Exec(
 		"UPDATE humano SET Salario = :1, Nome = :2, Genero = :3, IDColonia = :4 WHERE ID = :5",
-		h.Salario, h.Nome, h.Genero, h.ID, h.IDColonia,
+		h.Salario, h.Nome, h.Genero, h.IDColonia, h.ID,
 	)
 	return err
 }
