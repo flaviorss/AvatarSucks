@@ -170,7 +170,7 @@ func SetupRoutes(router *gin.Engine) {
 		var militar dao.Militar
 		if err := militar.Retrieve(id); err != nil {
 			c.JSON(http.StatusNotFound, gin.H{"error": "humano not found"})
-			return
+            return
 		}
 		c.JSON(http.StatusOK, militar)
 	})
@@ -194,6 +194,63 @@ func SetupRoutes(router *gin.Engine) {
 		id, _ := strconv.Atoi(c.Param("id"))
 		var militar dao.Militar
 		if err := militar.Delete(id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.Status(http.StatusNoContent)
+	})
+
+	router.GET("/cientistas", func(c *gin.Context) {
+		Cientistas, err := dao.ListCientistas()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, Cientistas)
+	})
+
+	router.POST("/cientistas", func(c *gin.Context) {
+		var cientista dao.Cientista
+		if err := c.BindJSON(&cientista); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		if err := cientista.Create(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusCreated, cientista)
+	})
+
+	router.GET("/cientistas/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var cientista dao.Cientista
+		if err := cientista.Retrieve(id); err != nil {
+			c.JSON(http.StatusNotFound, gin.H{"error": "humano not found"})
+			return
+		}
+		c.JSON(http.StatusOK, cientista)
+	})
+
+	router.PUT("/cientistas/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var cientista dao.Cientista
+		if err := c.BindJSON(&cientista); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		cientista.ID = id
+		if err := cientista.Update(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, cientista)
+	})
+
+	router.DELETE("/cientistas/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var cientista dao.Cientista
+		if err := cientista.Delete(id); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
