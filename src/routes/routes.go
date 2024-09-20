@@ -109,5 +109,21 @@ func SetupRoutes(router *gin.Engine) {
         }
         c.JSON(http.StatusOK, humano)
     })
+
+    router.PUT("/humanos/:id", func(c *gin.Context) {
+        id, _ := strconv.Atoi(c.Param("id"))
+        var humano dao.Humano
+        if err := c.BindJSON(&humano); err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+            return
+        }
+        humano.ID = id
+        if err := humano.Update(); err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+            return
+        }
+        c.JSON(http.StatusOK, humano)
+    })
+
 }
 
