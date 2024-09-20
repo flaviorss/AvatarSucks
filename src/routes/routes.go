@@ -1,9 +1,10 @@
 package routes
 
 import (
-    "github.com/gin-gonic/gin"
-    "net/http"
-    "Avatar_Sucks/dao"
+	"Avatar_Sucks/dao"
+	"net/http"
+	"strconv"
+	"github.com/gin-gonic/gin"
 )
 
 func SetupRoutes(router *gin.Engine) {
@@ -75,6 +76,15 @@ func SetupRoutes(router *gin.Engine) {
             return
         }
         c.JSON(http.StatusOK, Regioes)
+    })
+
+    router.GET("/humanos", func(c *gin.Context) {
+        Humanos, err := dao.ListHumanos()
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+            return
+        }
+        c.JSON(http.StatusOK, Humanos)
     })
 }
 
