@@ -82,10 +82,6 @@
     <h1 id="titulo" class="">Humano - Cientista</h1>
     <h4 id="sub-titulo"> CREATE Cientista </h4>
     <form class="row g-3">
-        <div class="col-sm-1">
-          <label for="inputID" class="form-label">ID</label>
-          <input type="number" class="form-control" id="inputID" autofocus required>
-        </div>
         <div class="col-sm-3">
           <label for="inputNome" class="form-label">Nome</label>
           <input type="text" class="form-control" id="inputNome" maxlength="100" required>
@@ -99,7 +95,7 @@
           </div>
         <div class="col-sm-2">
           <label for="inputSalario" class="form-label">Salario</label>
-          <input type="number" class="form-control" id="inputSalario">
+          <input type="number" step="0.01" class="form-control" id="inputSalario">
         </div>
         <div class="col-sm-2">
             <label for="inputIDColonia" class="form-label">ID Colonia</label>
