@@ -125,5 +125,14 @@ func SetupRoutes(router *gin.Engine) {
         c.JSON(http.StatusOK, humano)
     })
 
+    router.DELETE("/humanos/:id", func(c *gin.Context) {
+        id, _ := strconv.Atoi(c.Param("id"))
+        var humano dao.Humano
+        if err := humano.Delete(id); err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+            return
+        }
+        c.Status(http.StatusNoContent)
+    })
 }
 
