@@ -100,5 +100,14 @@ func SetupRoutes(router *gin.Engine) {
         c.JSON(http.StatusCreated, humano)
     })
 
+    router.GET("/humanos/:id", func(c *gin.Context) {
+        id, _ := strconv.Atoi(c.Param("id"))
+        var humano dao.Humano
+        if err := humano.Retrieve(id); err != nil {
+            c.JSON(http.StatusNotFound, gin.H{"error": "humano not found"})
+            return
+        }
+        c.JSON(http.StatusOK, humano)
+    })
 }
 
