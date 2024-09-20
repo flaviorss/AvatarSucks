@@ -86,5 +86,19 @@ func SetupRoutes(router *gin.Engine) {
         }
         c.JSON(http.StatusOK, Humanos)
     })
+
+    router.POST("/humanos", func(c *gin.Context) {
+        var humano dao.Humano
+        if err := c.BindJSON(&humano); err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+            return
+        }
+        if err := humano.Create(); err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+            return
+        }
+        c.JSON(http.StatusCreated, humano)
+    })
+
 }
 
