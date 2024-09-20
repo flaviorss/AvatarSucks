@@ -313,4 +313,13 @@ func SetupRoutes(router *gin.Engine) {
 		}
 		c.Status(http.StatusNoContent)
 	})
+
+    router.GET("/relatorio", func(c *gin.Context) {
+        results, err := dao.GetRelatorio()
+        if err != nil {
+            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+            return
+        }
+        c.JSON(http.StatusOK, results)
+    })
 }
