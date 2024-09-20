@@ -142,4 +142,61 @@ func SetupRoutes(router *gin.Engine) {
 		}
 		c.JSON(http.StatusOK, Colonias)
 	})
+
+	router.GET("/militares", func(c *gin.Context) {
+		Militares, err := dao.ListMilitares()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, Militares)
+	})
+
+	router.POST("/militares", func(c *gin.Context) {
+		var militar dao.Militar
+		if err := c.BindJSON(&militar); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		if err := militar.Create(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusCreated, militar)
+	})
+
+	router.GET("/militares/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var militar dao.Militar
+		if err := militar.Retrieve(id); err != nil {
+			c.JSON(http.StatusNotFound, gin.H{"error": "humano not found"})
+			return
+		}
+		c.JSON(http.StatusOK, militar)
+	})
+
+	router.PUT("/militares/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var militar dao.Militar
+		if err := c.BindJSON(&militar); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		militar.ID = id
+		if err := militar.Update(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, militar)
+	})
+
+	router.DELETE("/militares/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var militar dao.Militar
+		if err := militar.Delete(id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.Status(http.StatusNoContent)
+	})
 }
