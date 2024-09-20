@@ -61,7 +61,7 @@ async function fetchColonias(){
         }
         const colonias = await response.json();
         populateColoniaSelect(colonias);
-        populateColoniaSelectModal(colonias);
+//        populateColoniaSelectModal(colonias);
     } catch (error) {
         console.error('Fetch regions error:', error);
     }
@@ -81,19 +81,19 @@ async function populateColoniaSelect(colonias) {
         
 }
 
-async function populateColoniaSelectModal(colonias) {
-    const select = document.getElementById('inputModalIDColonia');
-
-    select.innerHTML = '<option value=""></option>';
-
-    colonias.forEach(colonia => {
-        const option = document.createElement('option');
-        option.value = colonia.ID; // Assuming the API returns an id field
-        option.textContent = `${colonia.ID} - ${colonia.Empresa}` // Assuming the API returns a nome field
-        select.appendChild(option);
-    });
-        
-}
+//async function populateColoniaSelectModal(colonias) {
+//    const select = document.getElementById('inputModalIDColonia');
+//
+//    select.innerHTML = '<option value=""></option>';
+//
+//    colonias.forEach(colonia => {
+//        const option = document.createElement('option');
+//        option.value = colonia.ID; // Assuming the API returns an id field
+//        option.textContent = `${colonia.ID} - ${colonia.Empresa}` // Assuming the API returns a nome field
+//        select.appendChild(option);
+//    });
+//        
+//}
 
 async function editMilitar(ID, Nome, Genero, Salario, IDColonia, Patente) {
     // Preencher os campos do modal com os dados da jazida

@@ -12,8 +12,8 @@ import (
 
 func main() {
 	// Initialize database
-	//db, err := config.InitDB("C##JAKE/123@localhost:1521/FREEPDB1")
-	db, err := config.InitDB("JAKE SULLY/root@localhost:1521/XEPDB1")
+	db, err := config.InitDB("C##JAKE/123@localhost:1521/FREEPDB1")
+	//db, err := config.InitDB("JAKE SULLY/root@localhost:1521/XEPDB1")
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 	}
