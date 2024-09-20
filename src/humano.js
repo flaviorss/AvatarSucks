@@ -1,4 +1,5 @@
-var fetchURL = "http://localhost:8080"
+//var fetchURL = "http://localhost:8080"
+var fetchURL = "https://buys-retailers-recommend-additionally.trycloudflare.com"
 
 async function fetchData() {
     try{
