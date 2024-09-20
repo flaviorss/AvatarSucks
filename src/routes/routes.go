@@ -256,4 +256,61 @@ func SetupRoutes(router *gin.Engine) {
 		}
 		c.Status(http.StatusNoContent)
 	})
+
+	router.GET("/mineradores", func(c *gin.Context) {
+		Mineradores, err := dao.ListMineradores()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, Mineradores)
+	})
+
+	router.POST("/mineradores", func(c *gin.Context) {
+		var minerador dao.Minerador
+		if err := c.BindJSON(&minerador); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		if err := minerador.Create(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusCreated, minerador)
+	})
+
+	router.GET("/mineradores/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var minerador dao.Minerador
+		if err := minerador.Retrieve(id); err != nil {
+			c.JSON(http.StatusNotFound, gin.H{"error": "humano not found"})
+            return
+		}
+		c.JSON(http.StatusOK, minerador)
+	})
+
+	router.PUT("/mineradores/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var minerador dao.Minerador
+		if err := c.BindJSON(&minerador); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		minerador.ID = id
+		if err := minerador.Update(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, minerador)
+	})
+
+	router.DELETE("/mineradores/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var minerador dao.Minerador
+		if err := minerador.Delete(id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.Status(http.StatusNoContent)
+	})
 }
