@@ -4,6 +4,7 @@ import (
 	"Avatar_Sucks/dao"
 	"net/http"
 	"strconv"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -66,70 +67,79 @@ func SetupRoutes(router *gin.Engine) {
 		}
 		c.Status(http.StatusNoContent)
 	})
-  
-    router.GET("/regioes", func(c *gin.Context) {
-        Regioes, err := dao.ListRegioes()
-        if err != nil {
-            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-            return
-        }
-        c.JSON(http.StatusOK, Regioes)
-    })
 
-    router.GET("/humanos", func(c *gin.Context) {
-        Humanos, err := dao.ListHumanos()
-        if err != nil {
-            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-            return
-        }
-        c.JSON(http.StatusOK, Humanos)
-    })
+	router.GET("/regioes", func(c *gin.Context) {
+		Regioes, err := dao.ListRegioes()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, Regioes)
+	})
 
-    router.POST("/humanos", func(c *gin.Context) {
-        var humano dao.Humano
-        if err := c.BindJSON(&humano); err != nil {
-            c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-            return
-        }
-        if err := humano.Create(); err != nil {
-            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-            return
-        }
-        c.JSON(http.StatusCreated, humano)
-    })
+	router.GET("/humanos", func(c *gin.Context) {
+		Humanos, err := dao.ListHumanos()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, Humanos)
+	})
 
-    router.GET("/humanos/:id", func(c *gin.Context) {
-        id, _ := strconv.Atoi(c.Param("id"))
-        var humano dao.Humano
-        if err := humano.Retrieve(id); err != nil {
-            c.JSON(http.StatusNotFound, gin.H{"error": "humano not found"})
-            return
-        }
-        c.JSON(http.StatusOK, humano)
-    })
+	router.POST("/humanos", func(c *gin.Context) {
+		var humano dao.Humano
+		if err := c.BindJSON(&humano); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		if err := humano.Create(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusCreated, humano)
+	})
 
-    router.PUT("/humanos/:id", func(c *gin.Context) {
-        id, _ := strconv.Atoi(c.Param("id"))
-        var humano dao.Humano
-        if err := c.BindJSON(&humano); err != nil {
-            c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-            return
-        }
-        humano.ID = id
-        if err := humano.Update(); err != nil {
-            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-            return
-        }
-        c.JSON(http.StatusOK, humano)
-    })
+	router.GET("/humanos/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var humano dao.Humano
+		if err := humano.Retrieve(id); err != nil {
+			c.JSON(http.StatusNotFound, gin.H{"error": "humano not found"})
+			return
+		}
+		c.JSON(http.StatusOK, humano)
+	})
 
-    router.DELETE("/humanos/:id", func(c *gin.Context) {
-        id, _ := strconv.Atoi(c.Param("id"))
-        var humano dao.Humano
-        if err := humano.Delete(id); err != nil {
-            c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-            return
-        }
-        c.Status(http.StatusNoContent)
-    })
+	router.PUT("/humanos/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var humano dao.Humano
+		if err := c.BindJSON(&humano); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+		humano.ID = id
+		if err := humano.Update(); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, humano)
+	})
+
+	router.DELETE("/humanos/:id", func(c *gin.Context) {
+		id, _ := strconv.Atoi(c.Param("id"))
+		var humano dao.Humano
+		if err := humano.Delete(id); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.Status(http.StatusNoContent)
+	})
+
+	router.GET("/colonias", func(c *gin.Context) {
+		Colonias, err := dao.ListColonias()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+		c.JSON(http.StatusOK, Colonias)
+	})
 }
