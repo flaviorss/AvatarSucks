@@ -163,6 +163,7 @@ function showHumano(humanos) {
                     <th scope="col">Nome</th>
                     <th scope="col">Salario</th>
                     <th scope="col">Genero</th>
+                    <th scope="col">Cargo</th>
                     <th scope="col">Colonia</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -177,6 +178,7 @@ function showHumano(humanos) {
                      <td>${humano.Nome}</td>
                      <td>${humano.Salario}</td>
                      <td>${humano.Genero}</td>
+                     <td>${humano.Cargo}</td>
                      <td>${humano.IDColonia}</td>
                      <td><button onclick="editHumano('${humano.ID}', '${humano.Nome}', '${humano.Genero}', '${humano.Salario}', ${humano.IDColonia})" 
                             type="button" 

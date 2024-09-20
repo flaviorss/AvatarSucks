@@ -10,12 +10,13 @@ type Humano struct {
 	Nome      string  `json:"Nome"`
 	Genero    string  `json:"Genero"`
 	IDColonia string  `json:"IDColonia"`
+	Cargo string  `json:"Cargo"`
 }
 
 func (h *Humano) Create() error {
 	db := config.GetDB()
 	_, err := db.Exec(
-		"INSERT INTO humano (Salario, Nome, Genero, IDColonia) VALUES (:1, :2, :3, :4)",
+		"INSERT INTO humano (Salario, Nome, Genero, IDColonia, Cargo) VALUES (:1, :2, :3, :4, Outro)",
 		h.Salario, h.Nome, h.Genero, h.IDColonia,
 	)
 	return err
@@ -49,7 +50,7 @@ func (h *Humano) Delete(id int) error {
 
 func ListHumanos() ([]Humano, error) {
 	db := config.GetDB()
-	rows, err := db.Query("SELECT ID, Salario, Nome, Genero, IDColonia FROM humano")
+	rows, err := db.Query("SELECT ID, Salario, Nome, Genero, IDColonia, Cargo FROM humano")
 	if err != nil {
 		return nil, err
 	}
@@ -58,7 +59,7 @@ func ListHumanos() ([]Humano, error) {
 	var humanos []Humano
 	for rows.Next() {
 		var humano Humano
-		if err := rows.Scan(&humano.ID, &humano.Salario, &humano.Nome, &humano.Genero, &humano.IDColonia); err != nil {
+		if err := rows.Scan(&humano.ID, &humano.Salario, &humano.Nome, &humano.Genero, &humano.IDColonia, &humano.Cargo); err != nil {
 			return nil, err
 		}
 		humanos = append(humanos, humano)
