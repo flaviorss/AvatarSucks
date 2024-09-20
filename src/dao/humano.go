@@ -1,67 +1,67 @@
 package dao
 
 import (
-    "Avatar_Sucks/config" // import the config package to access DB
+	"Avatar_Sucks/config" // import the config package to access DB
 )
 
 type Humano struct {
-    ID             int          `json:"ID"`
-    Salario        float32      `json:"Salario"`
-    Nome           string       `json:"Nome"`
-    Genero         string       `json:"Genero"`
-    IDColonia      string       `json:"IDColonia"`
+	ID        int     `json:"ID"`
+	Salario   float32 `json:"Salario"`
+	Nome      string  `json:"Nome"`
+	Genero    string  `json:"Genero"`
+	IDColonia string  `json:"IDColonia"`
 }
 
 func (h *Humano) Create() error {
-    db := config.GetDB()
-    _, err := db.Exec(
-        "INSERT INTO humano (ID, Salario, Nome, Genero, IDColonia) VALUES (:1, :2, :3, :4, :5)",
-        h.ID, h.Salario, h.Nome, h.Genero, h.IDColonia,
-    )
-    return err
+	db := config.GetDB()
+	_, err := db.Exec(
+		"INSERT INTO humano (Salario, Nome, Genero, IDColonia) VALUES (:1, :2, :3, :4)",
+		h.Salario, h.Nome, h.Genero, h.IDColonia,
+	)
+	return err
 }
 
 func (h *Humano) Retrieve(id int) error {
-    db := config.GetDB()
-    return db.QueryRow(
-        "SELECT ID, Salario, Nome, Genero, IDColonia FROM humano WHERE ID = :1",
-        id,
-    ).Scan(&h.ID, &h.Salario, &h.Nome, &h.Genero, &h.IDColonia)
+	db := config.GetDB()
+	return db.QueryRow(
+		"SELECT ID, Salario, Nome, Genero, IDColonia FROM humano WHERE ID = :1",
+		id,
+	).Scan(&h.ID, &h.Salario, &h.Nome, &h.Genero, &h.IDColonia)
 }
 
 func (h *Humano) Update() error {
-    db := config.GetDB()
-    _, err := db.Exec(
-        "UPDATE humano SET Salario = :1, Nome = :2, Genero = :3, IDColonia = :4 WHERE ID = :5",
-        h.Salario, h.Nome, h.Genero, h.ID, h.IDColonia,
-    )
-    return err
+	db := config.GetDB()
+	_, err := db.Exec(
+		"UPDATE humano SET Salario = :1, Nome = :2, Genero = :3, IDColonia = :4 WHERE ID = :5",
+		h.Salario, h.Nome, h.Genero, h.ID, h.IDColonia,
+	)
+	return err
 }
 
 func (h *Humano) Delete(id int) error {
-    db := config.GetDB()
-    _, err := db.Exec(
-        "DELETE FROM humano WHERE ID = :1",
-        id, 
-    )
-    return err
+	db := config.GetDB()
+	_, err := db.Exec(
+		"DELETE FROM humano WHERE ID = :1",
+		id,
+	)
+	return err
 }
 
 func ListHumanos() ([]Humano, error) {
-    db := config.GetDB()
-    rows, err := db.Query("SELECT ID, Salario, Nome, Genero, IDColonia FROM humano")
-    if err != nil {
-        return nil, err
-    }
-    defer rows.Close()
+	db := config.GetDB()
+	rows, err := db.Query("SELECT ID, Salario, Nome, Genero, IDColonia FROM humano")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
 
-    var humanos []Humano
-    for rows.Next() {
-        var humano Humano
-        if err := rows.Scan(&humano.ID, &humano.Salario, &humano.Nome, &humano.Genero, &humano.IDColonia); err != nil {
-            return nil, err
-        }
-        humanos = append(humanos, humano)
-    }
-    return humanos, nil
+	var humanos []Humano
+	for rows.Next() {
+		var humano Humano
+		if err := rows.Scan(&humano.ID, &humano.Salario, &humano.Nome, &humano.Genero, &humano.IDColonia); err != nil {
+			return nil, err
+		}
+		humanos = append(humanos, humano)
+	}
+	return humanos, nil
 }

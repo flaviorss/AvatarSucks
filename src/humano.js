@@ -1,4 +1,4 @@
-var fetchURL = "https://buys-retailers-recommend-additionally.trycloudflare.com"
+var fetchURL = "http://localhost:8080"
 
 async function fetchData() {
     try{
@@ -17,14 +17,12 @@ async function createHumano() {
     document.getElementById('createForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
-        const ID = document.getElementById('inputID').value;
         const nome = document.getElementById('inputNome').value;
         const genero = document.getElementById('inputGenero').value;
         const salario = document.getElementById('inputSalario').value;
         const idColonia = document.getElementById('inputIDColonia').value;
 
         const humanoData = {
-            ID: parseInt(ID),
             Nome: nome,
             Genero: genero,
             Salario: parseFloat(salario),
