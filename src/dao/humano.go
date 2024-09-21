@@ -10,13 +10,13 @@ type Humano struct {
 	Nome      string  `json:"Nome"`
 	Genero    string  `json:"Genero"`
 	IDColonia string  `json:"IDColonia"`
-	Cargo string  `json:"Cargo"`
+	Cargo     string  `json:"Cargo"`
 }
 
 func (h *Humano) Create() error {
 	db := config.GetDB()
 	_, err := db.Exec(
-		"INSERT INTO humano (Salario, Nome, Genero, IDColonia, Cargo) VALUES (:1, :2, :3, :4, Outro)",
+		"INSERT INTO humano (Salario, Nome, Genero, IDColonia, Cargo) VALUES (:1, :2, :3, :4, 'Outro')",
 		h.Salario, h.Nome, h.Genero, h.IDColonia,
 	)
 	return err
@@ -50,7 +50,7 @@ func (h *Humano) Delete(id int) error {
 
 func ListHumanos() ([]Humano, error) {
 	db := config.GetDB()
-	rows, err := db.Query("SELECT ID, Salario, Nome, Genero, IDColonia, Cargo FROM humano")
+	rows, err := db.Query("SELECT ID, Salario, Nome, Genero, IDColonia, Cargo FROM humano ORDER BY ID ASC")
 	if err != nil {
 		return nil, err
 	}
