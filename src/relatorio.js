@@ -1,4 +1,5 @@
-var fetchURL = "https://buys-retailers-recommend-additionally.trycloudflare.com"
+//var fetchURL = "https://buys-retailers-recommend-additionally.trycloudflare.com"
+var fetchURL = "http://localhost:8080"
 
 async function fetchData() {
     try{
@@ -15,11 +16,11 @@ async function fetchData() {
 
 function createTable(data) {
     const tableContainer = document.getElementById('relatorio-table-container');
-    let table = '<table><thead><tr>' +
+    let table = '<table class="table"><thead><tr>' +
                 '<th>IDColonia</th><th>EmpresaColonia</th><th>LatitudeJazida</th>' +
-                '<th>LongitudeJazida</th><th>SiglaRes</th><th>NomeRes</th>' +
-                '<th>SiglaDep</th><th>NomeDep</th><th>SiglaLab</th>' +
-                '<th>NomeLab</th><th>IDHumano</th><th>NomeHumano</th>' +
+                '<th>LongitudeJazida</th><th>SiglaRes</th><th>NomeResidencia</th>' +
+                '<th>SiglaDep</th><th>NomeDepartamento</th><th>SiglaLab</th>' +
+                '<th>NomeLaboratorio</th><th>IDHumano</th><th>NomeHumano</th>' +
                 '<th>CargoHumano</th><th>NomePesquisa</th>' +
                 '<th>NomeEquipamento</th><th>UtilidadeEquipamento</th>' +
                 '<th>IDCaminhao</th><th>IDEscavadeira</th></tr></thead><tbody>';
