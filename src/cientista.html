@@ -16,6 +16,9 @@
     body {
         background-color:rgb(210, 212, 216);
     }
+    .modalColor{
+      background-color:rgb(210, 212, 216);
+    }
   </style>
 </head>
 
@@ -121,7 +124,55 @@
       <script src="cientista.js"></script>
 
   </div>
-
+  <!--Modal-->
+  <div class="modal fade" id="modalEditarCientista" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content modalColor">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Cientista</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="row g-3" id="updateForm">
+            <div class="row">
+              <div class="col-sm-6">
+                <label for="inputModalNome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="inputModalNome" maxlength="100" required>
+              </div>
+              <div class="col-sm-2">
+                <label for="inputModalGenero" class="form-label">Genero</label>
+                <select name="inputModalGenero" id="inputModalGenero" class="form-select">
+                    <option>M</option>
+                    <option>F</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <label for="inputModalSalario" class="form-label">Salario</label>
+                <input type="number" step="0.01" class="form-control" id="inputModalSalario">
+              </div>
+              <div class="col-sm-3">
+                <label for="inputModalIDColonia" class="form-label">ID Colonia</label>
+                <select name="inputModalIDColonia" id="inputModalIDColonia" class="form-select" required>
+                    <option>0</option>
+                    <option>1</option>
+                </select>
+              </div>
+              <div class="col-sm-4">
+                <label for="inputModalAreaAtuacao" class="form-label">Area de Atuação</label>
+                <input type="text" class="form-control" id="inputModalAreaAtuacao" maxlength="100" required>
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Editar Cientista</button>
+              <button type="reset" class="btn btn-danger">Limpar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
