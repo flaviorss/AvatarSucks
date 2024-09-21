@@ -75,7 +75,7 @@ func (m *Militar) Delete(id int) error {
 
 func ListMilitares() ([]Militar, error) {
 	db := config.GetDB()
-	rows, err := db.Query("SELECT m.ID, m.Patente, h.Salario, h.Nome, h.Genero, h.IDColonia FROM militar m LEFT JOIN humano h ON m.ID = h.ID ")
+	rows, err := db.Query("SELECT m.ID, m.Patente, h.Salario, h.Nome, h.Genero, h.IDColonia FROM militar m LEFT JOIN humano h ON m.ID = h.ID ORDER BY ID ASC")
 	if err != nil {
 		return nil, err
 	}
