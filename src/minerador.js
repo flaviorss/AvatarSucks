@@ -1,4 +1,5 @@
-var fetchURL = "https://buys-retailers-recommend-additionally.trycloudflare.com"
+//var fetchURL = "https://buys-retailers-recommend-additionally.trycloudflare.com"
+var fetchURL = "http://localhost:8080"
 
 async function fetchData() {
     try{
@@ -61,7 +62,7 @@ async function fetchColonias(){
         }
         const colonias = await response.json();
         populateColoniaSelect(colonias);
-//        populateColoniaSelectModal(colonias);
+        populateColoniaSelectModal(colonias);
     } catch (error) {
         console.error('Fetch regions error:', error);
     }
@@ -81,19 +82,19 @@ async function populateColoniaSelect(colonias) {
         
 }
 
-//async function populateColoniaSelectModal(colonias) {
-//    const select = document.getElementById('inputModalIDColonia');
-//
-//    select.innerHTML = '<option value=""></option>';
-//
-//    colonias.forEach(colonia => {
-//        const option = document.createElement('option');
-//        option.value = colonia.ID; // Assuming the API returns an id field
-//        option.textContent = `${colonia.ID} - ${colonia.Empresa}` // Assuming the API returns a nome field
-//        select.appendChild(option);
-//    });
-//        
-//}
+async function populateColoniaSelectModal(colonias) {
+    const select = document.getElementById('inputModalIDColonia');
+
+    select.innerHTML = '<option value=""></option>';
+
+    colonias.forEach(colonia => {
+        const option = document.createElement('option');
+        option.value = colonia.ID; // Assuming the API returns an id field
+        option.textContent = `${colonia.ID} - ${colonia.Empresa}` // Assuming the API returns a nome field
+        select.appendChild(option);
+    });
+        
+}
 
 async function editMinerador(ID, Nome, Genero, Salario, IDColonia, Especialidade) {
     // Preencher os campos do modal com os dados da jazida
@@ -110,7 +111,7 @@ async function editMinerador(ID, Nome, Genero, Salario, IDColonia, Especialidade
         const genero = document.getElementById('inputModalGenero').value;
         const nome = document.getElementById('inputModalNome').value;
         const idcolonia = document.getElementById('inputModalIDColonia').value;
-        const especialidade = document.getElementById('inputEspecialidade').value;
+        const especialidade = document.getElementById('inputModalEspecialidade').value;
 
         const mineradorData = {
             Nome: nome,
